@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { SearchManufacturer } from "./";
 import Image from "next/image";
+import { motion, Variants } from "framer-motion";
 
 const SearchButton = ({ otherClasses }: { otherClasses?: string }) => (
   <button type="submit" className={`-ml-3 z-10 ${otherClasses}`}>
@@ -17,7 +18,7 @@ const SearchButton = ({ otherClasses }: { otherClasses?: string }) => (
   </button>
 );
 
-const SearchBar = ({ setManufacturer, setModel }) => {
+const SearchBar = ({ setManufacturer, setModel, variants }) => {
   const [searchManufacturer, setSearchManufacturer] = useState("");
   const [searchModel, setSearchModel] = useState("");
   const router = useRouter();
@@ -33,7 +34,7 @@ const SearchBar = ({ setManufacturer, setModel }) => {
   };
 
   return (
-    <form className="searchbar" onSubmit={handleSearch}>
+    <motion.form className="searchbar" onSubmit={handleSearch} variants={variants}>
       <div className="searchbar__item">
         <SearchManufacturer
           selected={searchManufacturer}
@@ -60,7 +61,7 @@ const SearchBar = ({ setManufacturer, setModel }) => {
         <SearchButton otherClasses="sm:hidden" />
       </div>
       <SearchButton otherClasses="max-sm:hidden" />
-    </form>
+    </motion.form>
   );
 };
 

@@ -1,24 +1,48 @@
+"use client"
+
 import { Footer, Navbar } from "@/components";
 import "./globals.css";
-import type { Metadata } from "next";
+import { ClerkProvider } from '@clerk/nextjs'
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion"
 
-export const metadata: Metadata = {
-  title: "Car Hub",
-  description: "Discover the best cars in the world.",
-};
+
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
   return (
-    <html lang="en">
-      <body className="relative">
-        <Navbar />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+
+        <body className="relative" suppressHydrationWarning={true}>
+          <>
+          <motion.div className="progress-bar" style={{ scaleX }} />
+          <Navbar />
+           <AnimatePresence>
+           <motion.div
+            initial={{ opacity:0, y:15 }}
+            animate={{ opacity:1 , y:0 }}
+            exit={{ opacity:0, y:15 }}
+            transition={{ delay:0.25 }}
+            
+            >
+            
+            {children}
+            </motion.div>
+           </AnimatePresence>
+          </>
+          <Footer />
+        </body>
+      </html>
+    </ClerkProvider>
+
   );
 }

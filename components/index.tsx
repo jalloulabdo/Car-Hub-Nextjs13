@@ -8,6 +8,12 @@ import SearchManufacturer from "./SearchManufacturer";
 import CarCard from "./CarCard";
 import CarDetails from "./CarDetails";
 import ShowMore from "./ShowMore";
+import Features  from "./Features";
+import Shape from "./Shape";
+import CheckAuth from "./CheckAuth";
+import Headkey from "./Head";
+import HeadContent from "./HeadContent";
+import ContactForm from "./ContactForm";
 export {
   Hero,
   CustomButton,
@@ -19,4 +25,10 @@ export {
   CarCard,
   CarDetails,
   ShowMore,
+  Features,
+  Shape,
+  CheckAuth,
+  Headkey,
+  HeadContent,
+  ContactForm
 };

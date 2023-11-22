@@ -1,11 +1,88 @@
 "use client";
 
-import { Hero, SearchBar, CustomFilter, CarCard, ShowMore } from "@/components";
+import { Hero, SearchBar, CustomFilter, CarCard, ShowMore, Features, Shape, ContactForm } from "@/components";
 import { fuels, yearsOfProduction } from "@/constants";
 import { fetchCars } from "@/utils";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import type { Metadata } from "next";
+import { motion, Variants } from "framer-motion";
 
+
+const container = {
+  show: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const title = {
+  hidden: { opacity: 0, x: -200 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      easing: 'cubic-bezier(0.6, 0.01, 0.88, 0.99)',
+      duration: 1,
+    },
+  },
+  exit: {
+    opacity: 0,
+    x: 200,
+    transition: {
+      ease: "easeInOut",
+      duration: 0.8,
+    },
+  },
+};
+const text = {
+  hidden: { opacity: 0, x: -200 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      easing: 'cubic-bezier(0.6, 0.01, 0.88, 0.99)',
+      duration: 1.8,
+    },
+  },
+  exit: {
+    opacity: 0,
+    x: -200,
+    transition: {
+      ease: "easeInOut",
+      duration: 2,
+    },
+  },
+};
+
+const search = {
+  hidden: { opacity: 0, x: -200 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      easing: 'cubic-bezier(0.6, 0.01, 0.88, 0.99)',
+      duration: 1.8,
+    },
+  },
+  exit: {
+    opacity: 0,
+    x: -200,
+    transition: {
+      ease: "easeInOut",
+      duration: 2,
+    },
+  },
+};
+
+const card = {
+  show: {
+    scale: [1, 2, 2, 1, 1],
+    rotate: [0, 0, 180, 180, 0],
+    borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+  }
+};
 export default function Home() {
   const [allCars, setAllCars] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -32,9 +109,9 @@ export default function Home() {
         model: model || "",
       });
 
+
       setAllCars(result);
     } catch (error) {
-      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -48,28 +125,45 @@ export default function Home() {
   return (
     <main className="overflow-hidden">
       <Hero />
-      <div className="mt-12 padding-x padding-y maw-with" id="discover">
+      <Features />
+      <motion.div className="mt-12 padding-x padding-y maw-with bg-slate-50" id="discover"
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        exit="exit"
+      >
         <div className="home__text-container">
-          <h1 className="text-4xl font-extrabold"> Car Catalogue</h1>
-          <p>Explore the cars you might like </p>
+          <motion.h1 className="text-4xl font-extrabold" variants={title}> Car Catalogue</motion.h1>
+          <motion.p variants={text}>Explore the cars you might like </motion.p>
         </div>
-        <div className="home__filters">
-          <SearchBar setManufacturer={setManufacturer} setModel={setModel} />
-          <div className="home__filter-container">
-            <CustomFilter title="fuel" options={fuels} setFilter={setFuel} />
+        <motion.div className="home__filters" variants={container}
+            initial="hidden"
+            whileInView="show"
+            exit="exit">
+          <SearchBar setManufacturer={setManufacturer}   setModel={setModel} variants={search} />
+          <motion.div className="home__filter-container"
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            exit="exit">
+            <CustomFilter  title="fuel" options={fuels} setFilter={setFuel}  variants={search} />
             <CustomFilter
               title="year"
               options={yearsOfProduction}
               setFilter={setYear}
+              variants={search}
             />
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
         {allCars.length > 0 ? (
           <section>
-            <div className="home__cars-wrapper">
-              {allCars?.map((car) => (
-                <CarCard car={car} />
-              ))}
+            <div className="home__cars-wrapper" 
+           
+            >
+              {allCars?.map((car, index) => (
+                <CarCard  key={index} car={car}  />
+              ))
+              }
             </div>
             {loading && (
               <div className="mt-16 w-full flex-center">
@@ -94,7 +188,9 @@ export default function Home() {
             <p>{allCars?.message}</p>
           </div>
         )}
-      </div>
+      </motion.div>
+      <Shape />
+      <ContactForm />
     </main>
   );
 }

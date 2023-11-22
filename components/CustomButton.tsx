@@ -2,6 +2,7 @@
 
 import { CustomButtonProps } from "@/types";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 function CustomButton({
   title,
@@ -12,7 +13,11 @@ function CustomButton({
   rightIcon,
 }: CustomButtonProps) {
   return (
-    <button
+    <motion.button
+      initial={{ x: -80, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: 30, opacity: 0 }}
+      transition={{ duration: 4.2 }}
       disabled={false}
       type={btnType || "button"}
       className={`custom-btn ${containerStyles}`}
@@ -30,7 +35,7 @@ function CustomButton({
           />
         </div>
       )}
-    </button>
+    </motion.button>
   );
 }
 

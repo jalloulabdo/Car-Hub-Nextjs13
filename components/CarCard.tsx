@@ -6,7 +6,37 @@ import { CarProps } from "@/types";
 import { CustomButton, CarDetails } from ".";
 import { calculateCarRent } from "@/utils";
 import { generateCarImageUrl } from "@/utils";
+import { motion, Variants, useMotionValue, useTransform } from "framer-motion";
 
+
+
+const container = {
+  show: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 200 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      easing: 'cubic-bezier(0.6, 0.01, 0.88, 0.99)',
+      duration: 1,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: 200,
+    transition: {
+      ease: "easeInOut",
+      duration: 0.8,
+    },
+  },
+};
 interface CarCardProps {
   car: CarProps;
 }
@@ -14,8 +44,16 @@ const CarCard = ({ car }: CarCardProps) => {
   const { city_mpg, year, make, model, transmission, drive } = car;
   const carRent = calculateCarRent(city_mpg, year);
   const [isOpen, setIsOpen] = useState(false);
+
+
+
   return (
-    <div className="car-card group">
+    <motion.div key={make} className="car-card group"
+      variants={item}
+      initial="hidden"
+      whileInView="show"
+      exit="exit"
+    >
       <div className="car-card__content">
         <h2 className="car-card__content-title">
           {make} {model}
@@ -72,7 +110,7 @@ const CarCard = ({ car }: CarCardProps) => {
         closeModal={() => setIsOpen(false)}
         car={car}
       />
-    </div>
+    </motion.div>
   );
 };
 

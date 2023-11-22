@@ -6,18 +6,20 @@ import { useRouter } from "next/navigation";
 import { Listbox, Transition } from "@headlessui/react";
 import { CustomFilterProps } from "@/types";
 import { updateSearchParams } from "@/utils";
+import { motion, Variants } from "framer-motion";
 
-function CustomFilter({ title, options, setFilter }: CustomFilterProps) {
+function CustomFilter({ title, options, setFilter, variants }: CustomFilterProps) {
   const [selected, setSelected] = useState(options[0]);
 
   return (
-    <div className="w-fit">
+    <motion.div className="w-fit" variants={variants}>
       <Listbox
         value={selected}
         onChange={(e) => {
           setSelected(e);
           setFilter(e.value);
         }}
+        
       >
         <div className="relative w-fit z-10">
           <Listbox.Button className="custom-filter__btn">
@@ -62,7 +64,7 @@ function CustomFilter({ title, options, setFilter }: CustomFilterProps) {
           </Transition>
         </div>
       </Listbox>
-    </div>
+    </motion.div>
   );
 }
 
