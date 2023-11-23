@@ -1,6 +1,6 @@
 "use client"
 
-import { Footer, Navbar } from "@/components";
+import { Footer, Navbar,NavbarTest } from "@/components";
 import "./globals.css";
 import { ClerkProvider } from '@clerk/nextjs'
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion"
@@ -25,7 +25,8 @@ export default function RootLayout({
         <body className="relative" suppressHydrationWarning={true}>
           <>
           <motion.div className="progress-bar" style={{ scaleX }} />
-          <Navbar />
+          {/* <Navbar /> */}
+          <NavbarTest />
            <AnimatePresence>
            <motion.div
             initial={{ opacity:0, y:15 }}

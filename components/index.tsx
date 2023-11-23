@@ -14,6 +14,7 @@ import CheckAuth from "./CheckAuth";
 import Headkey from "./Head";
 import HeadContent from "./HeadContent";
 import ContactForm from "./ContactForm";
+import NavbarTest from "./NavBarTest";
 export {
   Hero,
   CustomButton,
@@ -30,5 +31,6 @@ export {
   CheckAuth,
   Headkey,
   HeadContent,
-  ContactForm
+  ContactForm,
+  NavbarTest
 };

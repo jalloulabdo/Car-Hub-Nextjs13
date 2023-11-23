@@ -90,7 +90,7 @@ const Shape = () => {
 
                 <div className=" px-5  my-auto content-center   relative ">
                     <div className="gap:2rem lg:flex md:grid md:grid sm:grid sm:gap-8 sm:grid-cols-1  lg:justify-between  lg:max-w-7xl   lg:items-center  lg:gap-x-8 ">
-                        <div className=" w-full lg:w-2/4 sm:w-full ">
+                        <div className=" w-full lg:w-2/4  pb-16 md:pb-0 lg:pb-0 xl:pb-0">
                             <motion.h2 className="text-4xl leading-10 text-white mb-4 " variants={title}>THE CHEAPEST CAR RENTAL IN MOROCCO We care what you drive!</motion.h2>
                             <motion.p className="text-white" variants={text}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis nibh lorem. Duis sed odio lorem. In a efficitur leo. Ut venenatis rhoncus.</motion.p>
                         </div>
