@@ -157,9 +157,9 @@ const NavbarTest = () => {
                                                 Profile
                                             </motion.a>
                                         </li>
-                                        <li className="pb-6 text-xl text-white py-2 px-6 text-center  border-b-2 md:border-b-0   md:hover:text-purple-600 md:hover:bg-transparent" onClick={() => setNavbar(false)}>
+                                        <li className="pb-6 text-xl text-white py-2 px-6 flex justify-center  border-b-2 md:border-b-0   md:hover:text-purple-600 md:hover:bg-transparent" onClick={() => setNavbar(false)}>
 
-                                            <UserButton afterSignOutUrl="/" />
+                                            <UserButton afterSignOutUrl="/"  />
 
                                         </li>
                                     </>
